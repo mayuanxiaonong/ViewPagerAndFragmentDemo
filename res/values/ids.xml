@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <item type="id" name="tab_labels"></item>
+    <item type="id" name="tab_label_1"></item>
+    <item type="id" name="tab_label_2"></item>
+    <item type="id" name="tab_label_3"></item>
+    
+    <item type="id" name="image_cursor"></item>
+    <item type="id" name="viewPager"></item>
+    
+</resources>

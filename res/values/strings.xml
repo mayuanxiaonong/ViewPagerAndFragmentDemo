@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ViewPagerAndFragmentDemo</string>
-    <string name="hello_world">Hello world!</string>
-
+    <string name="app_name">What the Fuck to Eat</string>
+    <string name="tab_label_1">选项卡1</string>
+    <string name="tab_label_2">选项卡2</string>
+    <string name="tab_label_3">选项卡3</string>
+    
 </resources>

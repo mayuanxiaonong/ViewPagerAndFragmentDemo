@@ -2,11 +2,14 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     
     <item type="id" name="tab_labels"></item>
-    <item type="id" name="tab_label_1"></item>
+    <item type="id" name="tab_label_access_list"></item>
     <item type="id" name="tab_label_2"></item>
     <item type="id" name="tab_label_3"></item>
     
     <item type="id" name="image_cursor"></item>
     <item type="id" name="viewPager"></item>
+    
+    <item type="id" name="lv_access_list"></item>
+    <item type="id" name="lv_access_list_item"></item>
     
 </resources>

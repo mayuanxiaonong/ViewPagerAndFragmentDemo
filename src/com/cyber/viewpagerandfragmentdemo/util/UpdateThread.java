@@ -25,6 +25,8 @@ public class UpdateThread extends Thread {
 
 	@Override
 	public void run() {
+		InputStream is = null;
+		FileOutputStream fos = null;
 		try {
 			File path = Environment
 					.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
@@ -35,10 +37,11 @@ public class UpdateThread extends Thread {
 			URL url = new URL(
 					"http://192.168.1.88:8080/update/ViewPagerAndFragmentDemo.apk");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setConnectTimeout(10000);
 			conn.connect();
-			InputStream is = conn.getInputStream();
+			is = conn.getInputStream();
 
-			FileOutputStream fos = new FileOutputStream(file);
+			fos = new FileOutputStream(file);
 			byte buf[] = new byte[4096];
 			int n;
 			while ((n = is.read(buf)) != -1) {
@@ -54,6 +57,19 @@ public class UpdateThread extends Thread {
 			context.startActivity(i);
 		} catch (IOException e) {
 			Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+		} finally {
+			if(is != null) {
+				try {
+					is.close();
+				} catch (IOException e) {
+				}
+			}
+			if(fos != null) {
+				try {
+					fos.close();
+				} catch (IOException e) {
+				}
+			}
 		}
 
 	}

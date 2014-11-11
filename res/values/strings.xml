@@ -2,8 +2,11 @@
 <resources>
 
     <string name="app_name">What the Fuck to Eat</string>
-    <string name="tab_label_1">选项卡1</string>
+    <string name="tab_label_access_list">可访问</string>
     <string name="tab_label_2">选项卡2</string>
     <string name="tab_label_3">选项卡3</string>
-    
+    <string name="title_activity_test">TestActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
 </resources>

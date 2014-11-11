@@ -4,15 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
-import android.app.DownloadManager;
-import android.app.DownloadManager.Request;
 import android.content.DialogInterface;
 import android.graphics.Matrix;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
@@ -46,7 +42,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 
 		tmp = (TextView) findViewById(R.id.tmp);
 		tmp.setOnClickListener(this);
-		tv1 = (TextView) findViewById(R.id.tab_label_1);
+		tv1 = (TextView) findViewById(R.id.tab_label_access_list);
 		tv1.setOnClickListener(this);
 		textViews.add(tv1);
 		tv2 = (TextView) findViewById(R.id.tab_label_2);
@@ -66,9 +62,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		cursor.setImageMatrix(matrix);
 		
 		List<Fragment> list = new ArrayList<Fragment>();
-		list.add(Lay1Fragment.instance());
-		list.add(Lay2Fragment.instance());
-		list.add(Lay3Fragment.instance());
+		list.add(new AccessListFragment());
+		list.add(new Lay2Fragment());
+		list.add(new Lay3Fragment());
 		pager = (ViewPager) findViewById(R.id.viewPager);
 		pager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), list));
 		pager.setCurrentItem(0);
@@ -78,7 +74,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.tab_label_1:
+		case R.id.tab_label_access_list:
 			pager.setCurrentItem(0);
 			break;
 		case R.id.tab_label_2:
@@ -93,7 +89,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 			builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface arg0, int arg1) {
-//					update();
 					new UpdateThread(MainActivity.this).start();
 				}
 			});
@@ -102,57 +97,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 			break;
 		}
 	}
-	
-	private AlertDialog.Builder builder(String title, String message) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(title).setMessage(message);
-		return builder;
-	}
-	
-	private void update() {
-		try {
-			DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-			Uri uri = Uri.parse("http://192.168.1.88:8080/update/ViewPagerAndFragmentDemo.apk");
-			Request request = new Request(uri);
-			request.setAllowedNetworkTypes(Request.NETWORK_WIFI);
-			dm.enqueue(request);
-		} catch(Exception e) {
-			builder(null, e.toString()).setPositiveButton("OK", null).create().show();
-		}
-	}
-	
-	
-	public class MyPagerAdapter extends PagerAdapter {
-		
-		private List<View> list;
-		
-		public MyPagerAdapter(List<View> list) {
-			this.list = list;
-		}
 
-		@Override
-		public int getCount() {
-			return list.size();
-		}
-
-		@Override
-		public boolean isViewFromObject(View container, Object object) {
-			return container == object;
-		}
-
-		@Override
-		public void destroyItem(View container, int position, Object object) {
-			((ViewPager) container).removeView(list.get(position));
-		}
-
-		@Override
-		public Object instantiateItem(View container, int position) {
-			((ViewPager)container).addView(list.get(position), 0);
-			return list.get(position);
-		}
-		
-	}
-	
 	public class MyOnPageChangeListener implements OnPageChangeListener {
 		
 		@Override
